@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Minhas Transações - FinançasControladas{% endblock %}
+
+{% block content %}
+    <h2>Minhas Transações</h2>
+
+    {% if not transactions %}
+        <p>Você ainda não registrou nenhuma transação. <a href="{{ url_for('add_transaction') }}">Adicione uma agora!</a></p>
+    {% else %}
+        <table class="transactions-table">
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Descrição</th>
+                    <th>Categoria</th>
+                    <th>Tipo</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for transaction in transactions %}
+                <tr class="{{ transaction.type }}"> {# Adiciona classe 'receita' ou 'despesa' para estilização #}
+                    <td>{{ transaction.date }}</td>
+                    <td>{{ transaction.description if transaction.description else '-' }}</td>
+                    <td>{{ transaction.category_name if transaction.category_name else 'Sem Categoria' }}</td>
+                    <td>{{ transaction.type | capitalize }}</td> {# Capitaliza: receita -> Receita #}
+                    <td class="amount {{ transaction.type }}">R$ {{ '%.2f' | format(transaction.amount) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

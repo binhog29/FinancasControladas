@@ -1,14 +1,20 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <title>FinançasControladas</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body>
-    <h1>Bem-vindo ao FinançasControladas!</h1>
-    <p>Controle suas finanças com facilidade.</p>
+{% extends 'base.html' %}
 
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-</body>
-</html>
+{% block title %}Página Inicial - FinançasControladas{% endblock %}
+
+{% block content %}
+    <div class="hero-section">
+        {% if g.user %}
+            <h2>Bem-vindo, {{ g.user['username'] }}!</h2>
+            <p>Seu Saldo Total: <span class="balance">{{ '%.2f' | format(total_balance) }}</span></p>
+            <p>Comece a gerenciar suas finanças agora mesmo.</p>
+            <a href="{{ url_for('add_transaction') }}" class="button">Adicionar Nova Transação</a>
+        {% else %}
+            <h2>Controle Suas Finanças de Forma Simples e Eficiente.</h2>
+            <p>Mantenha suas receitas e despesas organizadas e alcance seus objetivos financeiros.</p>
+            <a href="{{ url_for('register') }}" class="button">Comece Agora - É Grátis!</a>
+            <a href="{{ url_for('login') }}" class="button secondary">Já Tenho Conta</a>
+        {% endif %}
+    </div>
+
+    {% endblock %}

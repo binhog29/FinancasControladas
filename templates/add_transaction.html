@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Adicionar Transação - FinançasControladas{% endblock %}
+
+{% block content %}
+    <h2>Adicionar Nova Transação</h2>
+    <form method="post" action="{{ url_for('add_transaction') }}">
+        <label for="description">Descrição (opcional):</label>
+        <input type="text" id="description" name="description">
+
+        <label for="amount">Valor:</label>
+        <input type="number" id="amount" name="amount" step="0.01" required>
+
+        <label for="type">Tipo:</label>
+        <select id="type" name="type" required>
+            <option value="receita">Receita</option>
+            <option value="despesa">Despesa</option>
+        </select>
+
+        <label for="category_id">Categoria:</label>
+        <select id="category_id" name="category_id">
+            {% for category in categories %}
+                <option value="{{ category.id }}">{{ category.name }} ({{ category.type }})</option>
+            {% endfor %}
+        </select>
+
+        <label for="date">Data:</label>
+        <input type="date" id="date" name="date" required value="{{ today }}"> {# Pré-preenche com a data atual #}
+
+        <button type="submit">Adicionar Transação</button>
+    </form>
+{% endblock %}
+
+{% block body_extra %}
+<script>
+    // Script para pré-preencher a data com a data atual
+    document.addEventListener('DOMContentLoaded', function() {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0'); // Mês começa do 0
+        const day = String(today.getDate()).padStart(2, '0');
+        document.getElementById('date').value = `${year}-${month}-${day}`;
+    });
+</script>
+{% endblock %}

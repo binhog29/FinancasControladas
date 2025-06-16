@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block title %}Minhas Contas - FinançasControladas{% endblock %}
+
+{% block content %}
+    <h2>Minhas Contas Financeiras</h2>
+
+    {% if not accounts %}
+        <p>Você ainda não adicionou nenhuma conta. <a href="{{ url_for('add_account') }}">Adicione sua primeira conta agora!</a></p>
+    {% else %}
+        <table class="accounts-table">
+            <thead>
+                <tr>
+                    <th>Nome da Conta</th>
+                    <th>Tipo</th>
+                    <th>Saldo Atual</th>
+                    <th>Limite (se cartão)</th>
+                    <th>Vencimento (se cartão)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for account in accounts %}
+                <tr>
+                    <td>{{ account.name }}</td>
+                    <td>{{ account.type | replace('_', ' ') | capitalize }}</td> {# Ex: cartao_credito -> Cartao credito #}
+                    <td class="balance-cell {{ 'positive' if account.current_balance >= 0 else 'negative' }}">
+                        R$ {{ '%.2f' | format(account.current_balance) }}
+                    </td>
+                    <td>
+                        {% if account.type == 'cartao_credito' %}
+                            R$ {{ '%.2f' | format(account.limit_amount) if account.limit_amount is not none else 'N/A' }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if account.type == 'cartao_credito' %}
+                            Dia {{ account.due_day if account.due_day is not none else 'N/A' }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    <p><a href="{{ url_for('add_account') }}" class="button">Adicionar Nova Conta</a></p>
+{% endblock %}
+
+{% block head_extra %}
+<style>
+    /* Estilos específicos para a tabela de contas (já presente no style.css, mas pode ser sobreescrito aqui se necessário) */
+    .accounts-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    .accounts-table th, .accounts-table td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+    }
+    .accounts-table th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+        color: #555;
+    }
+    .accounts-table tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    .accounts-table tbody tr:hover {
+        background-color: #f0f0f0;
+    }
+    .balance-cell.positive {
+        color: #28a745; /* Verde */
+        font-weight: bold;
+    }
+    .balance-cell.negative {
+        color: #dc3545; /* Vermelho */
+        font-weight: bold;
+    }
+</style>
+{% endblock %}

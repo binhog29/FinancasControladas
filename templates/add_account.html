@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Adicionar Conta - FinançasControladas{% endblock %}
+
+{% block content %}
+    <h2>Adicionar Nova Conta Financeira</h2>
+    <form method="post" action="{{ url_for('add_account') }}">
+        <label for="name">Nome da Conta:</label>
+        <input type="text" id="name" name="name" required placeholder="Ex: Conta Corrente Itaú, Cartão Nubank, Dinheiro">
+
+        <label for="type">Tipo da Conta:</label>
+        <select id="type" name="type" required>
+            <option value="">Selecione o Tipo</option>
+            <option value="banco">Conta Bancária</option>
+            <option value="cartao_credito">Cartão de Crédito</option>
+            <option value="cartao_debito">Cartão de Débito</option>
+            <option value="dinheiro">Dinheiro (Espécie)</option>
+            <option value="investimento">Investimento</option>
+            <option value="outros">Outros</option>
+        </select>
+
+        <label for="initial_balance">Saldo Inicial:</label>
+        <input type="number" id="initial_balance" name="initial_balance" step="0.01" value="0.00">
+
+        <h3>Informações Específicas (Opcional, para Cartão de Crédito)</h3>
+        <p>Preencha apenas se a conta for um Cartão de Crédito:</p>
+
+        <label for="limit_amount">Limite do Cartão:</label>
+        <input type="number" id="limit_amount" name="limit_amount" step="0.01" placeholder="Ex: 5000.00">
+
+        <label for="due_day">Dia de Vencimento da Fatura (1-31):</label>
+        <input type="number" id="due_day" name="due_day" min="1" max="31" placeholder="Ex: 10">
+
+        <button type="submit">Adicionar Conta</button>
+    </form>
+{% endblock %}

@@ -12,10 +12,12 @@
         <nav>
             <a href="{{ url_for('index') }}" class="logo">FinançasControladas</a>
             <ul>
-                {% if g.user %} {# g.user será configurado na próxima etapa para verificar o login #}
+                {% if g.user %} {# g.user é a variável global para o usuário logado #}
                     <li><a href="{{ url_for('add_transaction') }}">Adicionar Transação</a></li>
                     <li><a href="{{ url_for('view_transactions') }}">Ver Transações</a></li>
-                    <li><a href="#">Olá, {{ g.user['username'] }}!</a></li> {# Exibe o nome do usuário logado #}
+                    <li><a href="{{ url_for('add_account') }}">Adicionar Conta</a></li>
+                    <li><a href="{{ url_for('view_accounts') }}">Minhas Contas</a></li>
+                    <li><a href="#">Olá, {{ g.user['username'] }}!</a></li>
                     <li><a href="{{ url_for('logout') }}">Sair</a></li>
                 {% else %}
                     <li><a href="{{ url_for('register') }}">Registrar</a></li>

@@ -6,9 +6,28 @@
     <div class="hero-section">
         {% if g.user %}
             <h2>Bem-vindo, {{ g.user['username'] }}!</h2>
-            <p>Seu Saldo Total: <span class="balance">{{ '%.2f' | format(total_balance) }}</span></p>
+            <p>Seu Saldo Consolidado: <span class="balance">R$ {{ '%.2f' | format(total_balance) }}</span></p>
+            
+            {% if accounts %}
+                <h3>Saldos por Conta:</h3>
+                <ul class="account-list-summary">
+                {% for account in accounts %}
+                    <li>
+                        <strong>{{ account.name }}:</strong> 
+                        <span class="balance-summary-item {{ 'positive' if account.current_balance >= 0 else 'negative' }}">
+                            R$ {{ '%.2f' | format(account.current_balance) }}
+                        </span> 
+                        ({{ account.type | replace('_', ' ') | capitalize }})
+                    </li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p class="warning-text">Você ainda não adicionou nenhuma conta. <a href="{{ url_for('add_account') }}">Adicione sua primeira conta agora!</a></p>
+            {% endif %}
+
             <p>Comece a gerenciar suas finanças agora mesmo.</p>
             <a href="{{ url_for('add_transaction') }}" class="button">Adicionar Nova Transação</a>
+            <a href="{{ url_for('view_accounts') }}" class="button secondary">Gerenciar Contas</a>
         {% else %}
             <h2>Controle Suas Finanças de Forma Simples e Eficiente.</h2>
             <p>Mantenha suas receitas e despesas organizadas e alcance seus objetivos financeiros.</p>
@@ -18,3 +37,41 @@
     </div>
 
     {% endblock %}
+
+{% block head_extra %}
+<style>
+    /* Estilo para a lista de resumo de contas na home */
+    .account-list-summary {
+        list-style: none;
+        padding: 0;
+        margin-top: 20px;
+        text-align: center;
+    }
+    .account-list-summary li {
+        margin-bottom: 8px;
+        font-size: 1.1rem;
+    }
+    .balance-summary-item {
+        font-weight: bold;
+    }
+    .balance-summary-item.positive {
+        color: #28a745; /* Verde */
+    }
+    .balance-summary-item.negative {
+        color: #dc3545; /* Vermelho */
+    }
+    .warning-text { /* Estilo para o texto de aviso */
+        color: #856404; /* Cor de alerta */
+        background-color: #fff3cd; /* Fundo leve */
+        border: 1px solid #ffeeba;
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 15px;
+        text-align: center;
+    }
+    .warning-text a {
+        color: #007bff; /* Cor para o link dentro do aviso */
+        text-decoration: underline;
+    }
+</style>
+{% endblock %}

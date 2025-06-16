@@ -13,6 +13,7 @@
                 <tr>
                     <th>Data</th>
                     <th>Descrição</th>
+                    <th>Conta</th> {# NOVA COLUNA #}
                     <th>Categoria</th>
                     <th>Tipo</th>
                     <th>Valor</th>
@@ -20,11 +21,12 @@
             </thead>
             <tbody>
                 {% for transaction in transactions %}
-                <tr class="{{ transaction.type }}"> {# Adiciona classe 'receita' ou 'despesa' para estilização #}
+                <tr class="{{ transaction.type }}">
                     <td>{{ transaction.date }}</td>
                     <td>{{ transaction.description if transaction.description else '-' }}</td>
+                    <td>{{ transaction.account_name if transaction.account_name else 'N/A' }}</td> {# MOSTRA O NOME DA CONTA #}
                     <td>{{ transaction.category_name if transaction.category_name else 'Sem Categoria' }}</td>
-                    <td>{{ transaction.type | capitalize }}</td> {# Capitaliza: receita -> Receita #}
+                    <td>{{ transaction.type | capitalize }}</td>
                     <td class="amount {{ transaction.type }}">R$ {{ '%.2f' | format(transaction.amount) }}</td>
                 </tr>
                 {% endfor %}

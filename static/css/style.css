@@ -10,40 +10,70 @@ body {
 }
 
 header {
-    background-color: #28a745; /* Verde Finanças */
+    background-color: #28a745;
+    /* Verde Finanças */
     color: white;
-    padding: 1rem 0;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* NOVO: Usamos min-height e display flex diretamente no header */
+    min-height: 80px;
+    /* <--- Altura MÍNIMA do cabeçalho. Ajuste conforme o tamanho da sua imagem. */
+    display: flex;
+    justify-content: space-between;
+    /* Mantém o menu à direita */
+    align-items: center;
+    /* Centraliza verticalmente o conteúdo */
+    padding: 0 20px;
+    /* <--- Remove padding vertical, usa só horizontal */
+    flex-wrap: wrap;
+    /* Para responsividade, se a nav quebrar */
 }
 
 header nav {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
-    flex-wrap: wrap; /* Permite que os itens quebrem a linha em telas menores */
+    flex-grow: 1;
+    /* Permite que a nav ocupe o espaço restante */
 }
 
+/* Estilo para o link do logo (que agora só contem a imagem) */
 header nav .logo {
-    color: white;
-    font-size: 1.5rem;
-    font-weight: bold;
+    display: flex;
+    align-items: center;
     text-decoration: none;
-    margin-right: 20px; /* Espaçamento entre o logo e o menu */
+    margin-right: 40px;
+    /* Espaçamento entre o logo e o nome da app */
+}
+
+/* Estilo para a imagem do logo dentro do link */
+.header-logo {
+    height: 70px;
+    /* <--- ALTURA DESEJADA DA IMAGEM. Ajuste este valor. */
+    width: auto; /*Para manter a proporção. */
+    vertical-align: middle;
+    /* Ajuda no alinhamento */
+}
+
+/* Estilo para o nome principal da aplicação */
+.app-name {
+    color: rgb(255, 255, 255);
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-right: auto;
+    /* Empurra o menu para a direita */
 }
 
 header nav ul {
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 10;
     display: flex;
-    flex-wrap: wrap; /* Permite que os itens do menu quebrem a linha */
+    flex-wrap: wrap;
 }
 
 header nav ul li {
-    margin-left: 15px; /* Espaçamento entre os itens do menu */
+    margin-left: 1px;
 }
 
 header nav ul li a {
@@ -52,11 +82,11 @@ header nav ul li a {
     padding: 8px 12px;
     border-radius: 5px;
     transition: background-color 0.3s ease;
-    display: block; /* Garante que o padding e hover funcionem bem */
+    display: block;
 }
 
 header nav ul li a:hover {
-    background-color: rgba(255,255,255,0.2);
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 main {
@@ -65,7 +95,7 @@ main {
     padding: 20px;
     background-color: white;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 footer {
@@ -76,7 +106,9 @@ footer {
     margin-top: 40px;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     color: #28a745;
     text-align: center;
     margin-bottom: 20px;
@@ -97,7 +129,7 @@ form label {
     font-weight: bold;
     margin-bottom: 5px;
     color: #555;
-    display: block; /* Garante que o label ocupe sua própria linha */
+    display: block;
 }
 
 form input[type="text"],
@@ -106,20 +138,20 @@ form input[type="password"],
 form input[type="number"],
 form input[type="date"],
 form select,
-form textarea { /* Caso adicione textarea no futuro */
+form textarea {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 1rem;
     width: 100%;
-    box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura */
+    box-sizing: border-box;
 }
 
 /* Botões */
 .button {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #28a745; /* Cor primária */
+    background-color: #28a745;
     color: white;
     text-decoration: none;
     border-radius: 5px;
@@ -128,7 +160,7 @@ form textarea { /* Caso adicione textarea no futuro */
     cursor: pointer;
     font-size: 1rem;
     transition: background-color 0.3s ease;
-    margin-top: 10px; /* Espaçamento superior para botões em formulários */
+    margin-top: 10px;
 }
 
 .button:hover {
@@ -136,7 +168,8 @@ form textarea { /* Caso adicione textarea no futuro */
 }
 
 .button.secondary {
-    background-color: #6c757d; /* Cinza para botão secundário */
+    background-color: #6c757d;
+    color: white;
 }
 
 .button.secondary:hover {
@@ -163,7 +196,7 @@ form textarea { /* Caso adicione textarea no futuro */
     border: 1px solid #c3e6cb;
 }
 
-.flashes li.danger { /* Para erros */
+.flashes li.danger {
     background-color: #f8d7da;
     color: #721c24;
     border: 1px solid #f5c6cb;
@@ -185,27 +218,33 @@ form textarea { /* Caso adicione textarea no futuro */
 .hero-section {
     text-align: center;
     padding: 40px 20px;
-    background-color: #e9f7ef; /* Um tom mais claro do verde */
+    background-color: #e9f7ef;
+    /* Um tom mais claro do verde */
     border-radius: 8px;
     margin-bottom: 30px;
 }
+
 .hero-section h2 {
     font-size: 2.5rem;
     margin-bottom: 15px;
     color: #28a745;
 }
+
 .hero-section p {
     font-size: 1.1rem;
     color: #555;
     margin-bottom: 25px;
 }
+
 .hero-section .button {
     margin: 0 10px;
 }
+
 .balance {
     font-size: 1.8rem;
     font-weight: bold;
-    color: #007bff; /* Azul para o saldo */
+    color: #007bff;
+    /* Azul para o saldo */
 }
 
 /* Tabela de Transações */
@@ -215,7 +254,8 @@ form textarea { /* Caso adicione textarea no futuro */
     margin-top: 20px;
 }
 
-.transactions-table th, .transactions-table td {
+.transactions-table th,
+.transactions-table td {
     border: 1px solid #ddd;
     padding: 12px;
     text-align: left;
@@ -236,19 +276,20 @@ form textarea { /* Caso adicione textarea no futuro */
 }
 
 .transactions-table .receita {
-    color: #28a745; /* Verde para receita */
-    /* font-weight: bold; Removido para não duplicar, já tem no td.amount */
+    color: #28a745;
+    /* Verde para receita */
 }
 
 .transactions-table .despesa {
-    color: #dc3545; /* Vermelho para despesa */
-    /* font-weight: bold; Removido para não duplicar, já tem no td.amount */
+    color: #dc3545;
+    /* Vermelho para despesa */
 }
 
 .transactions-table .amount.receita {
     color: #28a745;
     font-weight: bold;
 }
+
 .transactions-table .amount.despesa {
     color: #dc3545;
     font-weight: bold;
@@ -260,28 +301,37 @@ form textarea { /* Caso adicione textarea no futuro */
     border-collapse: collapse;
     margin-top: 20px;
 }
-.accounts-table th, .accounts-table td {
+
+.accounts-table th,
+.accounts-table td {
     border: 1px solid #ddd;
     padding: 12px;
     text-align: left;
 }
+
 .accounts-table th {
     background-color: #f2f2f2;
     font-weight: bold;
     color: #555;
 }
+
 .accounts-table tbody tr:nth-child(even) {
     background-color: #f9f9f9;
 }
+
 .accounts-table tbody tr:hover {
     background-color: #f0f0f0;
 }
+
 .balance-cell.positive {
-    color: #28a745; /* Verde */
+    color: #28a745;
+    /* Verde */
     font-weight: bold;
 }
+
 .balance-cell.negative {
-    color: #dc3545; /* Vermelho */
+    color: #dc3545;
+    /* Vermelho */
     font-weight: bold;
 }
 
@@ -291,107 +341,159 @@ form textarea { /* Caso adicione textarea no futuro */
     padding: 0;
     margin-top: 20px;
     text-align: center;
-    max-width: 500px; /* Limita a largura para melhor leitura */
+    max-width: 500px;
+    /* Limita a largura para melhor leitura */
     margin-left: auto;
     margin-right: auto;
     background-color: #f9f9f9;
     border-radius: 8px;
     padding: 15px;
-    box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
 }
+
 .account-list-summary li {
     margin-bottom: 8px;
     font-size: 1.1rem;
     display: flex;
-    justify-content: space-between; /* Alinha o nome e o valor em lados opostos */
+    justify-content: space-between;
+    /* Alinha o nome e o valor em lados opostos */
     padding-bottom: 5px;
     border-bottom: 1px dashed #eee;
 }
+
 .account-list-summary li:last-child {
-    border-bottom: none; /* Remove a linha do último item */
+    border-bottom: none;
+    /* Remove a linha do último item */
     margin-bottom: 0;
 }
+
 .balance-summary-item {
     font-weight: bold;
 }
+
 .balance-summary-item.positive {
-    color: #28a745; /* Verde */
+    color: #28a745;
+    /* Verde */
 }
+
 .balance-summary-item.negative {
-    color: #dc3545; /* Vermelho */
+    color: #dc3545;
+    /* Vermelho */
 }
-.warning-text { /* Estilo para o texto de aviso */
-    color: #856404; /* Cor de alerta */
-    background-color: #fff3cd; /* Fundo leve */
+
+.warning-text {
+    /* Estilo para o texto de aviso */
+    color: #856404;
+    /* Cor de alerta */
+    background-color: #fff3cd;
+    /* Fundo leve */
     border: 1px solid #ffeeba;
     padding: 10px;
     border-radius: 5px;
     margin-top: 15px;
     text-align: center;
 }
+
 .warning-text a {
-    color: #007bff; /* Cor para o link dentro do aviso */
+    color: #007bff;
+    /* Cor para o link dentro do aviso */
     text-decoration: underline;
 }
 
 
 /* Responsividade básica para telas menores */
 @media (max-width: 768px) {
+    header {
+        min-height: auto;
+        /* Deixa a altura se ajustar novamente em telas pequenas */
+        padding: 1rem 20px;
+    }
+
     header nav {
         flex-direction: column;
         align-items: flex-start;
     }
+
+    header nav .app-name {
+        /* Ajusta o nome da app para telas pequenas */
+        font-size: 1.5rem;
+        margin-top: 10px;
+        margin-right: 0;
+    }
+
     header nav ul {
         flex-direction: column;
         width: 100%;
         margin-top: 10px;
     }
+
     header nav ul li {
         margin-left: 0;
         margin-bottom: 5px;
         width: 100%;
     }
+
     header nav ul li a {
         padding: 10px 20px;
         text-align: center;
     }
+
     main {
         margin: 10px;
         padding: 15px;
     }
+
     .hero-section .button {
         display: block;
-        width: calc(100% - 20px); /* 100% menos o padding */
+        width: calc(100% - 20px);
+        /* 100% menos o padding */
         margin: 10px auto;
     }
-    .transactions-table, .accounts-table {
+
+    .transactions-table,
+    .accounts-table {
         display: block;
-        overflow-x: auto; /* Adiciona scroll horizontal se a tabela for muito larga */
-        white-space: nowrap; /* Impede que o texto quebre em várias linhas */
+        overflow-x: auto;
+        /* Adiciona scroll horizontal se a tabela for muito larga */
+        white-space: nowrap;
+        /* Impede que o texto quebre em várias linhas */
     }
-    .transactions-table thead, .accounts-table thead {
-        display: none; /* Esconde o cabeçalho em telas pequenas */
+
+    .transactions-table thead,
+    .accounts-table thead {
+        display: none;
+        /* Esconde o cabeçalho em telas pequenas */
     }
-    .transactions-table tr, .accounts-table tr {
+
+    .transactions-table tr,
+    .accounts-table tr {
         margin-bottom: 10px;
         display: block;
         border: 1px solid #ddd;
         border-radius: 8px;
         padding: 10px;
     }
-    .transactions-table td, .accounts-table td {
+
+    .transactions-table td,
+    .accounts-table td {
         display: block;
         text-align: right;
         border-bottom: 1px dotted #eee;
         padding: 8px 0;
         position: relative;
-        padding-left: 50%; /* Espaço para o label */
+        padding-left: 50%;
+        /* Espaço para o label */
     }
-    .transactions-table td:last-child, .accounts-table td:last-child {
+
+    .transactions-table td:last-child,
+    .accounts-table td:last-child {
         border-bottom: none;
     }
-    .transactions-table td::before, .accounts-table td::before {
-        content: attr(data-label); /* Usa o atributo data-label */
+
+    .transactions-table td::before,
+    .accounts-table td::before {
+        content: attr(data-label);
+        /* Usa o atributo data-label */
         position: absolute;
         left: 0;
         width: 45%;

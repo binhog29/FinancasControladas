@@ -10,7 +10,13 @@
 <body>
     <header>
         <nav>
-            <a href="{{ url_for('index') }}" class="logo">FinançasControladas</a>
+            {# O link do logo agora contem apenas a imagem e vem ANTES do nome #}
+            <a href="{{ url_for('index') }}" class="logo">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo FinançasControladas" class="header-logo">
+            </a>
+            {# O nome principal da aplicação agora vem DEPOIS da imagem #}
+            <span class="app-name">FinançasControladas</span> 
+
             <ul>
                 {% if g.user %} {# g.user é a variável global para o usuário logado #}
                     <li><a href="{{ url_for('add_transaction') }}">Adicionar Transação</a></li>

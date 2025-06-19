@@ -4,32 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}FinançasControladas{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css', v=now.timestamp()) }}">
     {% block head_extra %}{% endblock %}
 </head>
 <body>
     <header>
         <nav>
-            {# O link do logo agora contem apenas a imagem e vem ANTES do nome #}
+            {# O link do logo (com a imagem) vem PRIMEIRO #}
             <a href="{{ url_for('index') }}" class="logo">
                 <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo FinançasControladas" class="header-logo">
             </a>
-            {# O nome principal da aplicação agora vem DEPOIS da imagem #}
+            {# O nome principal da aplicação vem DEPOIS da imagem #}
             <span class="app-name">FinançasControladas</span> 
 
-            <ul>
-                {% if g.user %} {# g.user é a variável global para o usuário logado #}
-                    <li><a href="{{ url_for('add_transaction') }}">Adicionar Transação</a></li>
-                    <li><a href="{{ url_for('view_transactions') }}">Ver Transações</a></li>
-                    <li><a href="{{ url_for('add_account') }}">Adicionar Conta</a></li>
-                    <li><a href="{{ url_for('view_accounts') }}">Minhas Contas</a></li>
-                    <li><a href="#">Olá, {{ g.user['username'] }}!</a></li>
-                    <li><a href="{{ url_for('logout') }}">Sair</a></li>
-                {% else %}
-                    <li><a href="{{ url_for('register') }}">Registrar</a></li>
-                    <li><a href="{{ url_for('login') }}">Login</a></li>
-                {% endif %}
-            </ul>
+            {# Ícone de menu para mobile #}
+            <div class="menu-icon" id="menuIcon">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+
+            {# Container dos links de navegação #}
+            <div class="nav-links-container" id="navLinksContainer">
+                <ul>
+                    {% if g.user %}
+                        <li><a href="{{ url_for('add_transaction') }}">Adicionar Transação</a></li>
+                        <li><a href="{{ url_for('view_transactions') }}">Ver Transações</a></li>
+                        <li><a href="{{ url_for('add_account') }}">Adicionar Conta</a></li>
+                        <li><a href="{{ url_for('view_accounts') }}">Minhas Contas</a></li>
+                        <li><a href="#" class="user-greeting">Olá, {{ g.user['username'] }}!</a></li>
+                        <li><a href="{{ url_for('logout') }}">Sair</a></li>
+                    {% else %}
+                        <li><a href="{{ url_for('register') }}">Registrar</a></li>
+                        <li><a href="{{ url_for('login') }}">Login</a></li>
+                    {% endif %}
+                </ul>
+            </div>
         </nav>
     </header>
 

@@ -10,70 +10,83 @@ body {
 }
 
 header {
-    background-color: #28a745;
-    /* Verde Finanças */
+    background-color: #28a745; /* Verde Finanças */
     color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    /* NOVO: Usamos min-height e display flex diretamente no header */
-    min-height: 80px;
-    /* <--- Altura MÍNIMA do cabeçalho. Ajuste conforme o tamanho da sua imagem. */
-    display: flex;
-    justify-content: space-between;
-    /* Mantém o menu à direita */
-    align-items: center;
-    /* Centraliza verticalmente o conteúdo */
-    padding: 0 20px;
-    /* <--- Remove padding vertical, usa só horizontal */
-    flex-wrap: wrap;
-    /* Para responsividade, se a nav quebrar */
+    padding: 1rem 0; /* Padding padrão que não deve causar quebras */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 header nav {
     display: flex;
-    align-items: center;
+    justify-content: space-between;
+    align-items: center; /* Alinha itens verticalmente no centro */
     max-width: 1200px;
     margin: 0 auto;
-    flex-grow: 1;
-    /* Permite que a nav ocupe o espaço restante */
+    padding: 0 20px;
+    flex-wrap: nowrap; /* Impede que os itens quebrem a linha em telas grandes */
 }
 
-/* Estilo para o link do logo (que agora só contem a imagem) */
+/* Estilo para o link do logo */
 header nav .logo {
     display: flex;
     align-items: center;
     text-decoration: none;
-    margin-right: 40px;
-    /* Espaçamento entre o logo e o nome da app */
+    margin-right: 15px; /* Espaçamento entre o logo e o nome da app */
 }
 
-/* Estilo para a imagem do logo dentro do link */
+/* Estilo para a imagem do logo */
 .header-logo {
-    height: 70px;
-    /* <--- ALTURA DESEJADA DA IMAGEM. Ajuste este valor. */
-    width: auto; /*Para manter a proporção. */
+    width: 150px;
+    height: 80px; /* Altura padrão do logo */
     vertical-align: middle;
-    /* Ajuda no alinhamento */
 }
 
 /* Estilo para o nome principal da aplicação */
 .app-name {
-    color: rgb(255, 255, 255);
+    color: white;
     font-size: 1.8rem;
     font-weight: bold;
-    margin-right: auto;
-    /* Empurra o menu para a direita */
+    margin-right: auto; /* Empurra o menu para a direita */
+}
+
+/* --- ESTILOS DO MENU HAMBURGUER (oculto em telas grandes) --- */
+.menu-icon {
+    display: none; /* Oculto por padrão em telas grandes */
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    background: transparent;
+    border: none;
+    padding: 0;
+    z-index: 20; /* Garante que o ícone esteja acima do menu */
+}
+
+.menu-icon .bar {
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+/* Container dos links de navegação (visível por padrão em telas grandes) */
+.nav-links-container {
+    padding: 0.5px 0;
+    margin-left: 30px;
+    display: flex; /* Visível por padrão em telas grandes */
+    align-items: center;
 }
 
 header nav ul {
     list-style: none;
     margin: 0;
-    padding: 10;
+    padding: 0;
     display: flex;
     flex-wrap: wrap;
-}
-
-header nav ul li {
-    margin-left: 1px;
+    gap: 15px;
+    align-items: center;
 }
 
 header nav ul li a {
@@ -81,13 +94,30 @@ header nav ul li a {
     text-decoration: none;
     padding: 8px 12px;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
     display: block;
+    font-weight: 500;
 }
 
 header nav ul li a:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255,255,255,0.2);
+    color: #e0e0e0;
 }
+
+/* Estilo para o nome do usuário logado */
+header nav ul li a.user-greeting {
+    background-color: rgba(0,0,0,0.1);
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: default;
+}
+
+header nav ul li a.user-greeting:hover {
+    background-color: rgba(0,0,0,0.1);
+    color: white;
+}
+
 
 main {
     max-width: 800px;
@@ -95,7 +125,7 @@ main {
     padding: 20px;
     background-color: white;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 footer {
@@ -106,9 +136,7 @@ footer {
     margin-top: 40px;
 }
 
-h1,
-h2,
-h3 {
+h1, h2, h3 {
     color: #28a745;
     text-align: center;
     margin-bottom: 20px;
@@ -219,32 +247,26 @@ form textarea {
     text-align: center;
     padding: 40px 20px;
     background-color: #e9f7ef;
-    /* Um tom mais claro do verde */
     border-radius: 8px;
     margin-bottom: 30px;
 }
-
 .hero-section h2 {
     font-size: 2.5rem;
     margin-bottom: 15px;
     color: #28a745;
 }
-
 .hero-section p {
     font-size: 1.1rem;
     color: #555;
     margin-bottom: 25px;
 }
-
 .hero-section .button {
     margin: 0 10px;
 }
-
 .balance {
     font-size: 1.8rem;
     font-weight: bold;
     color: #007bff;
-    /* Azul para o saldo */
 }
 
 /* Tabela de Transações */
@@ -254,8 +276,7 @@ form textarea {
     margin-top: 20px;
 }
 
-.transactions-table th,
-.transactions-table td {
+.transactions-table th, .transactions-table td {
     border: 1px solid #ddd;
     padding: 12px;
     text-align: left;
@@ -277,19 +298,16 @@ form textarea {
 
 .transactions-table .receita {
     color: #28a745;
-    /* Verde para receita */
 }
 
 .transactions-table .despesa {
     color: #dc3545;
-    /* Vermelho para despesa */
 }
 
 .transactions-table .amount.receita {
     color: #28a745;
     font-weight: bold;
 }
-
 .transactions-table .amount.despesa {
     color: #dc3545;
     font-weight: bold;
@@ -301,20 +319,16 @@ form textarea {
     border-collapse: collapse;
     margin-top: 20px;
 }
-
-.accounts-table th,
-.accounts-table td {
+.accounts-table th, .accounts-table td {
     border: 1px solid #ddd;
     padding: 12px;
     text-align: left;
 }
-
 .accounts-table th {
     background-color: #f2f2f2;
     font-weight: bold;
     color: #555;
 }
-
 .accounts-table tbody tr:nth-child(even) {
     background-color: #f9f9f9;
 }
@@ -322,16 +336,12 @@ form textarea {
 .accounts-table tbody tr:hover {
     background-color: #f0f0f0;
 }
-
 .balance-cell.positive {
     color: #28a745;
-    /* Verde */
     font-weight: bold;
 }
-
 .balance-cell.negative {
     color: #dc3545;
-    /* Vermelho */
     font-weight: bold;
 }
 
@@ -342,158 +352,174 @@ form textarea {
     margin-top: 20px;
     text-align: center;
     max-width: 500px;
-    /* Limita a largura para melhor leitura */
     margin-left: auto;
     margin-right: auto;
     background-color: #f9f9f9;
     border-radius: 8px;
     padding: 15px;
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
 }
-
 .account-list-summary li {
     margin-bottom: 8px;
     font-size: 1.1rem;
     display: flex;
     justify-content: space-between;
-    /* Alinha o nome e o valor em lados opostos */
     padding-bottom: 5px;
     border-bottom: 1px dashed #eee;
 }
-
 .account-list-summary li:last-child {
     border-bottom: none;
-    /* Remove a linha do último item */
     margin-bottom: 0;
 }
-
 .balance-summary-item {
     font-weight: bold;
 }
-
 .balance-summary-item.positive {
     color: #28a745;
-    /* Verde */
 }
-
 .balance-summary-item.negative {
     color: #dc3545;
-    /* Vermelho */
 }
-
 .warning-text {
-    /* Estilo para o texto de aviso */
     color: #856404;
-    /* Cor de alerta */
     background-color: #fff3cd;
-    /* Fundo leve */
     border: 1px solid #ffeeba;
     padding: 10px;
     border-radius: 5px;
     margin-top: 15px;
     text-align: center;
 }
-
 .warning-text a {
     color: #007bff;
-    /* Cor para o link dentro do aviso */
     text-decoration: underline;
 }
 
 
-/* Responsividade básica para telas menores */
+/* --- RESPONSIVIDADE PARA O MENU HAMBURGUER --- */
 @media (max-width: 768px) {
-    header {
-        min-height: auto;
-        /* Deixa a altura se ajustar novamente em telas pequenas */
-        padding: 1rem 20px;
+    header nav {
+        flex-direction: column; /* Altera para coluna para mobile */
+        align-items: center; /* Centraliza itens na coluna */
+        flex-wrap: wrap; /* Permite a quebra dos itens internos se necessário */
+        padding: 10px 20px; /* Ajusta padding para mobile */
     }
 
-    header nav {
-        flex-direction: column;
-        align-items: flex-start;
+    header nav .logo {
+        order: -1; /* Mantém o logo no topo */
+        margin-right: 0; /* Remove margin-right */
+        margin-bottom: 10px; /* Adiciona espaçamento abaixo do logo */
     }
 
     header nav .app-name {
-        /* Ajusta o nome da app para telas pequenas */
         font-size: 1.5rem;
-        margin-top: 10px;
-        margin-right: 0;
+        margin-right: 0; /* Remove margin-right */
+        margin-bottom: 15px; /* Espaçamento abaixo do nome da app */
+    }
+    
+    .menu-icon {
+        display: flex; /* Exibe o ícone de menu em telas pequenas */
+        position: absolute; /* Posiciona o ícone de forma absoluta */
+        top: 20px; /* Ajuste para a posição vertical */
+        right: 20px; /* Ajuste para a posição horizontal */
+        z-index: 30; /* Acima de tudo */
+    }
+
+    /* Oculta o container de links por padrão em mobile */
+    .nav-links-container {
+        display: flex; /* Muda para flex para que o flex-direction funcione */
+        flex-direction: column;
+        width: 100%;
+        background-color: #28a745; /* Fundo do menu aberto */
+        position: absolute; /* Para que ele não afete o layout quando escondido */
+        top: 0; /* Inicia no topo da tela */
+        left: 0;
+        right: 0;
+        height: 100vh; /* Ocupa a altura total da viewport */
+        padding-top: 80px; /* Espaço para o cabeçalho fixo */
+        z-index: 25; /* Acima do conteúdo, abaixo do ícone */
+        transform: translateX(100%); /* Esconde fora da tela (para a direita) */
+        transition: transform 0.3s ease-out; /* Transição para deslizar */
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    /* Quando a classe 'open' é adicionada via JS, o menu aparece */
+    .nav-links-container.open {
+        transform: translateX(0%); /* Desliza para a posição visível */
+        opacity: 1;
+        visibility: visible;
     }
 
     header nav ul {
         flex-direction: column;
         width: 100%;
-        margin-top: 10px;
+        gap: 0; /* Remove o gap entre os itens de menu na vertical */
     }
 
     header nav ul li {
         margin-left: 0;
-        margin-bottom: 5px;
         width: 100%;
+        text-align: center; /* Centraliza os links no menu mobile */
     }
 
     header nav ul li a {
-        padding: 10px 20px;
-        text-align: center;
+        padding: 15px 20px; /* Aumenta o padding para facilitar o toque */
+        border-bottom: 1px solid rgba(255,255,255,0.1); /* Separador entre os links */
     }
 
+    header nav ul li:last-child a {
+        border-bottom: none; /* Remove o separador do último link */
+    }
+
+    /* Animação do ícone do menu quando aberto */
+    .menu-icon.open .bar:nth-child(1) {
+        transform: translateY(11px) rotate(45deg);
+    }
+    .menu-icon.open .bar:nth-child(2) {
+        opacity: 0;
+    }
+    .menu-icon.open .bar:nth-child(3) {
+        transform: translateY(-11px) rotate(-45deg);
+    }
+
+    /* Outras regras responsivas existentes */
     main {
         margin: 10px;
         padding: 15px;
     }
-
     .hero-section .button {
         display: block;
         width: calc(100% - 20px);
-        /* 100% menos o padding */
         margin: 10px auto;
     }
-
-    .transactions-table,
-    .accounts-table {
+    .transactions-table, .accounts-table {
         display: block;
         overflow-x: auto;
-        /* Adiciona scroll horizontal se a tabela for muito larga */
         white-space: nowrap;
-        /* Impede que o texto quebre em várias linhas */
     }
-
-    .transactions-table thead,
-    .accounts-table thead {
+    .transactions-table thead, .accounts-table thead {
         display: none;
-        /* Esconde o cabeçalho em telas pequenas */
     }
-
-    .transactions-table tr,
-    .accounts-table tr {
+    .transactions-table tr, .accounts-table tr {
         margin-bottom: 10px;
         display: block;
         border: 1px solid #ddd;
         border-radius: 8px;
         padding: 10px;
     }
-
-    .transactions-table td,
-    .accounts-table td {
+    .transactions-table td, .accounts-table td {
         display: block;
         text-align: right;
         border-bottom: 1px dotted #eee;
         padding: 8px 0;
         position: relative;
         padding-left: 50%;
-        /* Espaço para o label */
     }
-
-    .transactions-table td:last-child,
-    .accounts-table td:last-child {
+    .transactions-table td:last-child, .accounts-table td:last-child {
         border-bottom: none;
     }
-
-    .transactions-table td::before,
-    .accounts-table td::before {
+    .transactions-table td::before, .accounts-table td::before {
         content: attr(data-label);
-        /* Usa o atributo data-label */
         position: absolute;
         left: 0;
         width: 45%;
